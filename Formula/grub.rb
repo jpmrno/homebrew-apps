@@ -1,36 +1,41 @@
 class Grub < Formula
   desc "Grub2 for OS development"
   homepage "https://www.gnu.org/software/grub"
-  url "ftp://ftp.gnu.org/gnu/grub/grub-2.00.tar.gz"
-  sha256 ""
+  url "git://git.savannah.gnu.org/grub.git"
+  version "2.00"
 
-  depends_on "automake"
-  depends_on "autoconf"
+  depends_on "automake" => :build
+  depends_on "autogen" => :build
+  depends_on "autoconf" => :build
+  depends_on "flex" => :build
   depends_on "jpmrno/apps/crossyc"
 
   resource "objconv" do
     url "http://www.agner.org/optimize/objconv.zip"
-    sha256 ""
+    sha256 "1aa3171a8f0ebba7902b413857b178df2b079cbc31bfb95b196ba7a685c227ba"
   end
 
   def install
     resource("objconv").stage do
-      g++ -o objconv -O2 src/*.cpp
+      system "unzip", "source.zip"
+      system "#{ENV.cxx} -o objconv -O2 *.cpp"
       bin.install "objconv"
     end
 
     ENV["PATH"] += ":#{bin}"
 
-    ./autogen.sh
+    system "./autogen.sh"
 
     args = [
       "--target=x86_64-elf",
       "--prefix=#{prefix}",
-      "TARGET_CC=x86_64-elf-gcc",
-      "TARGET_OBJCOPY=x86_64-elf-objcopy",
-      "TARGET_STRIP=x86_64-elf-strip",
-      "TARGET_NM=x86_64-elf-nm",
-      "TARGET_RANLIB=x86_64-elf-ranlib",
+      "LDFLAGS=-L#{Formula["flex"].opt_prefix}/lib",
+      "CPPFLAGS=-I#{Formula["flex"].opt_prefix}/include",
+      "TARGET_CC=#{Formula["crossyc"].opt_prefix}/bin/x86_64-elf-gcc",
+      "TARGET_OBJCOPY=#{Formula["crossyc"].opt_prefix}/bin/x86_64-elf-objcopy",
+      "TARGET_STRIP=#{Formula["crossyc"].opt_prefix}/bin/x86_64-elf-strip",
+      "TARGET_NM=#{Formula["crossyc"].opt_prefix}/bin/x86_64-elf-nm",
+      "TARGET_RANLIB=#{Formula["crossyc"].opt_prefix}/bin/x86_64-elf-ranlib",
       "--disable-werror",
     ]
 
@@ -39,5 +44,7 @@ class Grub < Formula
       system "make"
       system "make", "install"
     end
+
+    etc.rmtree
   end
 end
