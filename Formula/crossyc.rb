@@ -7,7 +7,7 @@ class Crossyc < Formula
 
   option "without-gcc", "Build binutils only (no gcc compiler)"
 
-  if ! build.without? "gcc" do
+  unless build.without? "gcc"
     depends_on "gmp"
     depends_on "libmpc"
     depends_on "mpfr"
@@ -42,7 +42,7 @@ class Crossyc < Formula
       info.rmtree
     end
 
-    if ! build.without? "gcc" do
+    unless build.without? "gcc"
       ENV["PATH"] += ":#{bin}"
 
       args = [
