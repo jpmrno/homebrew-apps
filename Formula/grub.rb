@@ -7,7 +7,7 @@ class Grub < Formula
   depends_on "automake" => :build
   depends_on "autogen" => :build
   depends_on "autoconf" => :build
-  depends_on "flex" => :build
+  depends_on "flex"
   depends_on "jpmrno/apps/crossyc"
 
   resource "objconv" do
@@ -31,11 +31,11 @@ class Grub < Formula
       "--prefix=#{prefix}",
       "LDFLAGS=-L#{Formula["flex"].opt_prefix}/lib",
       "CPPFLAGS=-I#{Formula["flex"].opt_prefix}/include",
-      "TARGET_CC=#{Formula["crossyc"].opt_prefix}/bin/x86_64-elf-gcc",
-      "TARGET_OBJCOPY=#{Formula["crossyc"].opt_prefix}/bin/x86_64-elf-objcopy",
-      "TARGET_STRIP=#{Formula["crossyc"].opt_prefix}/bin/x86_64-elf-strip",
-      "TARGET_NM=#{Formula["crossyc"].opt_prefix}/bin/x86_64-elf-nm",
-      "TARGET_RANLIB=#{Formula["crossyc"].opt_prefix}/bin/x86_64-elf-ranlib",
+      "TARGET_CC=#{Formula["crossyc"].bin}/x86_64-elf-gcc",
+      "TARGET_OBJCOPY=#{Formula["crossyc"].bin}/x86_64-elf-objcopy",
+      "TARGET_STRIP=#{Formula["crossyc"].bin}/x86_64-elf-strip",
+      "TARGET_NM=#{Formula["crossyc"].bin}/x86_64-elf-nm",
+      "TARGET_RANLIB=#{Formula["crossyc"].bin}/x86_64-elf-ranlib",
       "--disable-werror",
     ]
 

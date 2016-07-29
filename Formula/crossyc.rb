@@ -1,5 +1,5 @@
 class Crossyc < Formula
-  desc "Cross Compiler. x86_64 GCC & Binutils without libs for OS development"
+  desc "Cross Compiler. x86_64 Binutils & GCC without libs for OS development"
   homepage "http://gcc.gnu.org"
   url "https://ftpmirror.gnu.org/gcc/gcc-6.1.0/gcc-6.1.0.tar.bz2"
   mirror "https://ftp.gnu.org/gnu/gcc/gcc-6.1.0/gcc-6.1.0.tar.bz2"
