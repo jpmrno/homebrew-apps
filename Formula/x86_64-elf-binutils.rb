@@ -23,7 +23,6 @@ class X8664ElfBinutils < Formula
       system "make", "install"
     end
 
-    man7.rmtree
     info.rmtree
   end
 end
