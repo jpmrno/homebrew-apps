@@ -28,6 +28,7 @@ class X8664ElfGcc < Formula
     args = [
       "--target=#{TARGET}",
       "--prefix=#{prefix}",
+      "--program-prefix=#{TARGET}-",
       "--program-suffix=-#{version.to_s.slice(/\d/)}",
       "--enable-languages=#{languages.join(",")}",
       "--with-gmp=#{Formula["gmp"].opt_prefix}",
