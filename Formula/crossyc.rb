@@ -1,13 +1,14 @@
 class Crossyc < Formula
-  gcc_version = "7.2.0"
-  binutils_version = "2.29.1"
-  target = "x86_64-elf"
+  GCC_VERSION = "7.2.0"
+  BINUTILS_VERSION = "2.29.1"
+  TARGET = "x86_64-elf"
 
   desc "Cross Compiler. x86_64 Binutils & GCC without libs for OS development"
   homepage "http://gcc.gnu.org"
-  version "#{gcc_version}-#{binutils_version}"
-  url "https://ftp.gnu.org/gnu/gcc/gcc-#{gcc_version}/gcc-#{gcc_version}.tar.gz"
-  mirror "https://ftpmirror.gnu.org/gcc/gcc-#{gcc_version}/gcc-#{gcc_version}.tar.gz"
+  version "#{GCC_VERSION}-#{BINUTILS_VERSION}"
+  url "https://ftp.gnu.org/gnu/gcc/gcc-#{GCC_VERSION}/gcc-#{GCC_VERSION}.tar.gz"
+  mirror "https://ftpmirror.gnu.org/gcc/gcc-#{GCC_VERSION}/gcc-#{GCC_VERSION}.tar.gz"
+  sha256 "0153a003d3b433459336a91610cca2995ee0fb3d71131bd72555f2231a6efcfc"
 
   option "without-gcc", "Build binutils only (without gcc compiler)"
   option "without-libiconv", "Don't use homebrew's libiconv"
@@ -22,8 +23,9 @@ class Crossyc < Formula
   end
 
   resource "binutils" do
-    url "https://ftp.gnu.org/gnu/binutils/binutils-#{binutils_version}.tar.gz"
-    mirror "https://ftpmirror.gnu.org/binutils/binutils-#{binutils_version}.tar.gz"
+    url "https://ftp.gnu.org/gnu/binutils/binutils-#{BINUTILS_VERSION}.tar.gz"
+    mirror "https://ftpmirror.gnu.org/binutils/binutils-#{BINUTILS_VERSION}.tar.gz"
+    sha256 "0d9d2bbf71e17903f26a676e7fba7c200e581c84b8f2f43e72d875d0e638771c"
   end
 
   def install
@@ -32,7 +34,7 @@ class Crossyc < Formula
 
     resource("binutils").stage do
       args = [
-        "--target=#{target}",
+        "--target=#{TARGET}",
         "--prefix=#{prefix}",
         "--disable-nls",
         "--disable-werror",
@@ -55,7 +57,7 @@ class Crossyc < Formula
       languages << "c++" if build.with? "c++"
 
       args = [
-        "--target=#{target}",
+        "--target=#{TARGET}",
         "--prefix=#{prefix}",
         "--enable-languages=#{languages.join(",")}",
         "--with-gmp=#{Formula["gmp"].opt_prefix}",
