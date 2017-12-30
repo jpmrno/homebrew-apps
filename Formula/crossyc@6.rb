@@ -1,5 +1,5 @@
-class Crossyc < Formula
-  gcc_version = "7.2.0"
+class CrossycAT6 < Formula
+  gcc_version = "6.4.0"
   binutils_version = "2.29.1"
   target = "x86_64-elf"
 
