@@ -6,7 +6,7 @@ class X8664ElfGccAT6 < Formula
   homepage "https://gcc.gnu.org"
   url "https://ftp.gnu.org/gnu/gcc/gcc-#{GCC_VERSION}/gcc-#{GCC_VERSION}.tar.gz"
   mirror "https://ftpmirror.gnu.org/gcc/gcc-#{GCC_VERSION}/gcc-#{GCC_VERSION}.tar.gz"
-  sha256 "0153a003d3b433459336a91610cca2995ee0fb3d71131bd72555f2231a6efcfc"
+  sha256 "4715f02413f8a91d02d967521c084990c99ce1a671b8a450a80fbd4245f4b728"
 
   option "without-libiconv", "Don't use homebrew's libiconv"
   option "with-c++", "Build with c++ support"
