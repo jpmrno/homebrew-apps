@@ -30,14 +30,15 @@ class X8664ElfGccAT6 < Formula
       "--prefix=#{prefix}",
       "--program-prefix=#{TARGET}-",
       "--program-suffix=-#{version.to_s.slice(/\d/)}",
-      "--enable-languages=#{languages.join(",")}",
       "--with-gmp=#{Formula["gmp"].opt_prefix}",
       "--with-mpfr=#{Formula["mpfr"].opt_prefix}",
       "--with-mpc=#{Formula["libmpc"].opt_prefix}",
       "--with-isl=#{Formula["isl"].opt_prefix}",
+      "--with-as=#{Formula["jpmrno/apps/x86_64-elf-binutils"].bin}/#{TARGET}-as",
+      "--with-ld=#{Formula["jpmrno/apps/x86_64-elf-binutils"].bin}/#{TARGET}-ld",
+      "--enable-languages=#{languages.join(",")}",
       "--without-headers",
-      "--disable-nls",
-      "--disable-werror",
+      "--disable-nls", # Optional, but reduces dependencies and compile time
     ]
 
     unless build.without? "libiconv"
